@@ -8,7 +8,7 @@
 date_default_timezone_set("Asia/Jakarta");
 class bigtoken extends modules
 {
-        private $domains = "@sharklasers.com";
+        private $domains = "@desoz.com";
 
         public function registerAccount($referralCode)
         {
@@ -89,7 +89,7 @@ class tempMail extends modules
 {
 
         protected $mailName;
-        protected $domain = "guerrillamail.com";
+        protected $domain = "tempail.com";
 
         public function __construct($mailName)
         {
@@ -98,7 +98,7 @@ class tempMail extends modules
 
         protected function getIpToken()
         {
-                $apiToken = $this->getStr($this->curl("https://www.guerrillamail.com", null, false, false, array(), 'GET'), 'api_token : \'', '\'', 1, 0);
+                $apiToken = $this->getStr($this->curl("https://www.tempail.com", null, false, false, array(), 'GET'), 'api_token : \'', '\'', 1, 0);
                 return $apiToken;
         }
 
@@ -109,12 +109,12 @@ class tempMail extends modules
                 $headers[] = "Authorization: ApiToken ".$this->getIpToken(); 
                 $headers[] = "Content-Type: application/x-www-form-urlencoded; charset=UTF-8"; 
                 $headers[] = "Cookie: PHPSESSID=".$PHPSESSID."; __cfduid=d7ce4997ba4fe3d0b677434d8e17e73fe1554249274; _ga=GA1.2.1939465402.1554249275; _gid=GA1.2.263874565.1554249275"; 
-                $headers[] = "Host: www.guerrillamail.com"; 
-                $headers[] = "Origin: https://www.guerrillamail.com"; 
-                $headers[] = "Referer: https://www.guerrillamail.com/inbox"; 
+                $headers[] = "Host: www.tempail.com"; 
+                $headers[] = "Origin: https://www.tempail.com"; 
+                $headers[] = "Referer: https://www.tempail.com/inbox"; 
                 $headers[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"; 
                 $headers[] = "X-Requested-With: XMLHttpRequest"; 
-                $createMail = $this->curl("https://www.guerrillamail.com/ajax.php?f=set_email_user", "email_user=".$mailName."&lang=en&site=".$domain."&in=+Set+cancel", false, true, $headers);
+                $createMail = $this->curl("https://www.tempail.com/ajax.php?f=set_email_user", "email_user=".$mailName."&lang=en&site=".$domain."&in=+Set+cancel", false, true, $headers);
                 return $createMail;
         }
 
@@ -126,19 +126,19 @@ class tempMail extends modules
                         $headers[] = "Authorization: ApiToken ".$this->getIpToken();
                         $headers[] = "Content-Type: application/x-www-form-urlencoded; charset=UTF-8"; 
                         $headers[] = "Cookie: PHPSESSID=".$PHPSESSID."; __cfduid=d7ce4997ba4fe3d0b677434d8e17e73fe1554249274; _ga=GA1.2.1939465402.1554249275; _gid=GA1.2.263874565.1554249275"; 
-                        $headers[] = "Host: www.guerrillamail.com"; 
-                        $headers[] = "Origin: https://www.guerrillamail.com"; 
-                        $headers[] = "Referer: https://www.guerrillamail.com/inbox"; 
+                        $headers[] = "Host: www.tempail.com"; 
+                        $headers[] = "Origin: https://www.tempail.com"; 
+                        $headers[] = "Referer: https://www.tempail.com/inbox"; 
                         $headers[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"; 
                         $headers[] = "X-Requested-With: XMLHttpRequest"; 
-                        $pageInbox = $this->curl("https://www.guerrillamail.com/inbox", null, false, false, $headers, 'GET');
-                        $this->curl("https://www.guerrillamail.com/ajax.php?f=check_email&seq=1&site=".$this->domain."&in=".$mailName."&_=".time(), null, false, false, $headers, 'GET');
+                        $pageInbox = $this->curl("https://www.tempail.com/inbox", null, false, false, $headers, 'GET');
+                        $this->curl("https://www.tempail.com/ajax.php?f=check_email&seq=1&site=".$this->domain."&in=".$mailName."&_=".time(), null, false, false, $headers, 'GET');
                         if(preg_match('/Confirmation needed: Your BIGtoken email address/', $pageInbox) or strpos($pageInbox, 'Confirmation needed: Your BIGtoken email address') or preg_match('/Big Token/i', $pageInbox) or strpos($pageInbox, 'BIGToken') or preg_match('/BIGToken/', $pageInbox) or preg_match('/BIG Token/', $pageInbox))
                         {
                                 @$linkMail = $this->getStr($pageInbox, '<a rel="nofollow" href="', '"', 1, 0);
                                 if(!empty($linkMail))
                                 {
-                                        return "https://www.guerrillamail.com".$linkMail;
+                                        return "https://www.tempail.com".$linkMail;
                                 }else{
                                         print "\r\rLink Mail Not found";
                                 }
@@ -158,9 +158,9 @@ class tempMail extends modules
                 $headers[] = "Authorization: ApiToken ".$this->getIpToken();
                 $headers[] = "Content-Type: application/x-www-form-urlencoded; charset=UTF-8"; 
                 $headers[] = "Cookie: PHPSESSID=".$PHPSESSID."; __cfduid=d7ce4997ba4fe3d0b677434d8e17e73fe1554249274; _ga=GA1.2.1939465402.1554249275; _gid=GA1.2.263874565.1554249275"; 
-                $headers[] = "Host: www.guerrillamail.com"; 
-                $headers[] = "Origin: https://www.guerrillamail.com"; 
-                $headers[] = "Referer: https://www.guerrillamail.com/inbox"; 
+                $headers[] = "Host: www.tempail.com"; 
+                $headers[] = "Origin: https://www.tempail.com"; 
+                $headers[] = "Referer: https://www.tempail.com/inbox"; 
                 $headers[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"; 
                 $headers[] = "X-Requested-With: XMLHttpRequest"; 
                 $getLinkActivasi = $this->curl($url, null, false, false, $headers, 'GET');
@@ -178,10 +178,10 @@ class tempMail extends modules
                 $mailName = $this->mailName;
                 $PHPSESSID = $this->randStr("huruf_angka", "20");
                 $createMail = $this->createMail($mailName, $PHPSESSID); 
-                if(strpos($createMail, '"success":true'))
+                if(strpos($createhttps://www.tempail.com/, '"success":true'))
                 {
                         $pageInbox = $this->pageInbox($mailName, $PHPSESSID);
-                        if(strpos($pageInbox, 'https://www.guerrillamail.com/') or preg_match('/www.guerrillamail.com/i', $pageInbox))
+                        if(strpos($pageInbox, 'https://www.tempail.com/') or preg_match('/www.tempail.com/i', $pageInbox))
                         {
                                 $getLinkActivasi = $this->getLinkActivasi($pageInbox, $PHPSESSID);
                                 return $getLinkActivasi;
